@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { AppContext } from '../../context/AppContext'
 import iconComplete from '../../assets/images/icon-complete.svg'
-import { cardNumberValidator, monthValidator, yearValidator } from '../../utils/validators'
+import { cardNumberValidator, cvcValidator, monthValidator, yearValidator } from '../../utils/validators'
 
 export const Main = () => {
   const { onHandleName, onHandleMonth, onHandleYear, onHandleCardNumber, onHandleCvc, onCardNumberInput, onDateInput, onCvcInput } = useContext(AppContext)
@@ -115,11 +115,13 @@ export const Main = () => {
               onInput={onCvcInput}
               {...register('cvc', {
                 onChange: onHandleCvc,
-                required: true
+                required: true,
+                validate: cvcValidator
               })}
 
             />
             {errors.cvc?.type === 'required' && <p className='text-inputError text-[11px]'>Can't be blank.</p>}
+            {errors.cvc?.type === 'validate' && <p className='text-inputError text-[11px]'>Min. length 3.</p>}
           </label>
         </div>
 

@@ -9,3 +9,7 @@ export const monthValidator = (value) => {
 export const yearValidator = (value) => {
     return value >= 22 && value <= 90
 }
+
+export const cvcValidator = (value) => {
+    return value.length === 3
+}
